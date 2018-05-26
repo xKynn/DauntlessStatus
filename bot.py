@@ -42,7 +42,10 @@ class DauntlessStatus:
             else:
                 self.last_status = status
                 tweet_status = '\n'.join(status)
-                self.api.update_status(status=tweet_status)
+                try:
+                    self.api.update_status(status=tweet_status)
+                except tweepy.error.TweepError:
+                    pass
 
             if incidents:
                 tweet_incidents = '\n'.join(incidents)
