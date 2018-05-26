@@ -22,7 +22,10 @@ class DauntlessStatus:
             status = list()
             for item in soup.select('ul.systems li'):
                 splits = item.text.replace('\n', '').split(' ')
-                status.append(f"{splits[0]} - {splits[1]}")
+                if splits[0] == "Game":
+                    status.append(f"{splits[0]} {splits[1]} - {splits[2]}")
+                else:
+                    status.append(f"{splits[0]} - {splits[1]}")
             incidents = list()
             for item in soup.select('div.incidents'):
                 tm = item.select_one('span.date').text.split('/')
